@@ -1,55 +1,70 @@
-# college-placement-portal-frontend
+# Getting Started with Create React App
 
- College Placement Portal – Frontend (React)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-The College Placement Portal is a web application designed to help students participate in campus placements smoothly. Students can register, log in, apply for jobs, get placement-related updates, access preparation material, and explore available training programs. Placement Officers can add, update, and manage job postings, and students receive notifications whenever a new job is added.
+In the project directory, you can run:
 
+### `npm start`
 
-This frontend is built using **React (JSX, CSS)** and communicates with a **Spring Boot backend** using secure REST APIs.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
----
+### `npm test`
 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## 🎯 Features
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### 👨‍🎓 Student Features
-- Register and log in securely
-- View latest job openings
-- Apply for available jobs
-- Access preparation materials and interview resources
-- Explore training programs and upcoming events
-- Get counselling support & roadmaps for career planning
-- Receive job notifications via email
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### 🧑‍💼 Placement Officer Features
-- Add new job postings  
-- Update or delete existing job details  
-- View student applications  
-- Notify students about jobs and placement activities  
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### 📚 Additional Modules
-- Training & Skill Development Programs  
-- Roadmaps & Career Guidance  
-- Previous students’ placement experiences  
-- College placement statistics  
-- Industry trends & preparation material  
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
----
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Learn More
 
-## 🛠️ Tech Stack
-- **React (JSX)**
-- **React Router**
-- **CSS3**
-- **Axios**
-- **LocalStorage for authentication state**
-- **REST API integration with Spring Boot backend**
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
+To learn React, check out the [React documentation](https://reactjs.org/).
 
----
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

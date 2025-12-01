@@ -1,0 +1,17 @@
+/* Prevent default margin/padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure app expands full screen */
+html, body {
+  height: 100%;
+}
+
+/* Prevent sideways scrolling */
+body {
+  overflow-x: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
