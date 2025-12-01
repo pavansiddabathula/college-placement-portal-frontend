@@ -1,0 +1,281 @@
+/* Global design tokens */
+:root{
+--navy:#071933;
+--navy-700:#0b2545;
+--navy-500:#1a3a6b;
+--accent:#0b66ff;
+--white:#ffffff;
+--off-white:#f5f8ff;
+--muted:#6b6f76;
+--border:#e6eef9;
+--shadow-soft: 0 6px 20px rgba(11,38,73,0.06);
+--shadow-medium: 0 12px 36px rgba(11,38,73,0.10);
+--radius-sm:8px;
+--radius-md:12px;
+--radius-lg:16px;
+--space-xs:6px;
+--space-sm:12px;
+--space-md:16px;
+--space-lg:24px;
+--space-xl:36px;
+--font-xl: clamp(22px, 3.2vw, 32px);
+--font-lg: clamp(18px, 2.4vw, 24px);
+--font-md: clamp(15px, 1.6vw, 18px);
+--font-sm: 14px;
+--transition-fast: 180ms;
+--transition-std: 260ms;
+}
+
+/* Page wrapper center */
+.login-page-wrapper{
+min-height:calc(100vh - 140px);
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(180deg,#eef8ff 0%, #f7fbff 100%);
+padding:24px;
+box-sizing:border-box;
+}
+
+/* Main container card */
+.login-page-container{
+width:420px;
+max-width:96%;
+background:var(--white);
+padding:48px 40px;
+border-radius:var(--radius-lg);
+box-shadow:var(--shadow-medium);
+text-align:center;
+transition:transform var(--transition-std) ease, box-shadow var(--transition-std) ease;
+will-change:transform;
+}
+
+/* Card hover lift */
+.login-page-container:hover{
+transform:translateY(-6px);
+box-shadow: 0 22px 60px rgba(11,38,73,0.12);
+}
+
+/* Title centered and prominent */
+.login-title{
+font-size:var(--font-xl);
+font-weight:800;
+color:var(--navy-700);
+margin:0 0 6px 0;
+line-height:1;
+}
+
+/* Subtitle centered and subtle */
+.login-subtext{
+color:var(--muted);
+margin:0 0 var(--space-lg) 0;
+font-size:var(--font-md);
+}
+
+/* Small container spacing for modal */
+.login-page-container .login-modal{
+margin-top:6px;
+}
+
+/* Modal card styles */
+.login-modal{
+display:flex;
+justify-content:center;
+width:100%;
+}
+
+/* Inner form card */
+.login-card{
+width:100%;
+max-width:360px;
+background:var(--white);
+padding:18px;
+border-radius:var(--radius-md);
+border:1px solid var(--border);
+box-shadow:var(--shadow-soft);
+margin:0 auto;
+transition:transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+/* Slight lift on hover for inner card */
+.login-card:hover{
+transform:translateY(-4px);
+box-shadow: 0 14px 40px rgba(11,38,73,0.08);
+}
+
+/* Role switch container */
+.role-switch{
+display:inline-flex;
+gap:10px;
+background:transparent;
+padding:6px;
+border-radius:12px;
+margin-bottom:18px;
+}
+
+/* Role buttons baseline */
+.role-switch button{
+padding:10px 16px;
+border-radius:10px;
+border:1px solid transparent;
+font-weight:700;
+font-size:var(--font-sm);
+cursor:pointer;
+transition:all var(--transition-fast) ease;
+background:var(--off-white);
+color:var(--navy-700);
+box-shadow:none;
+}
+
+/* Active role emphasized */
+.role-switch button.active{
+background:var(--navy-700);
+color:var(--white);
+box-shadow: 0 8px 20px rgba(11,38,73,0.12);
+transform:translateY(-2px);
+}
+
+/* Labels left aligned inside the form */
+.login-card label{
+display:block;
+text-align:left;
+font-weight:700;
+color:var(--navy-700);
+margin-top:12px;
+margin-bottom:8px;
+font-size:var(--font-sm);
+}
+
+/* Inputs sized and styled for clarity */
+.login-card input{
+width:100%;
+padding:12px 14px;
+border-radius:10px;
+border:1px solid var(--border);
+background:#fbfdff;
+box-sizing:border-box;
+font-size:var(--font-sm);
+color:var(--navy-700);
+transition:box-shadow var(--transition-fast) ease, border-color var(--transition-fast) ease;
+}
+
+/* Input focus glow */
+.login-card input:focus{
+outline:none;
+border-color:var(--accent);
+box-shadow:0 6px 18px rgba(11,102,255,0.10);
+}
+
+/* Password row for icon */
+.password-row{
+position:relative;
+}
+
+/* space for icon inside input */
+.password-row input{
+padding-right:44px;
+}
+
+/* Eye icon style */
+.eye-icon{
+position:absolute;
+right:12px;
+top:50%;
+transform:translateY(-50%);
+font-size:18px;
+color:#667085;
+cursor:pointer;
+transition:transform var(--transition-fast) ease, color var(--transition-fast) ease;
+}
+
+/* Eye hover effect */
+.eye-icon:hover{
+transform:translateY(-50%) scale(1.03);
+color:var(--navy-700);
+}
+
+/* Error text style */
+.err{
+color:#d32f2f;
+font-size:13px;
+margin-top:8px;
+text-align:left;
+}
+
+/* Primary button baseline */
+.primary{
+width:100%;
+padding:12px 14px;
+border-radius:10px;
+border:none;
+background:var(--navy-700);
+color:var(--white);
+font-weight:800;
+font-size:var(--font-md);
+margin-top:16px;
+cursor:pointer;
+transition:transform var(--transition-fast) ease, background var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+box-shadow: 0 8px 24px rgba(11,38,73,0.09);
+}
+
+/* Primary hover lift and color deepening */
+.primary:hover{
+transform:translateY(-3px);
+background: #061632;
+box-shadow: 0 18px 40px rgba(11,38,73,0.14);
+}
+
+/* Primary active press */
+.primary:active{
+transform:translateY(0);
+}
+
+/* Links style centered and alive */
+.forgot-link, .register-link{
+margin-top:18px;
+font-size:var(--font-sm);
+text-align:center;
+}
+
+/* anchor baseline with subtle motion */
+.forgot-link a, .register-link a{
+color:var(--navy-700);
+font-weight:700;
+text-decoration:none;
+display:inline-block;
+transition:transform var(--transition-fast) ease, color var(--transition-fast) ease;
+}
+
+/* anchor hover moves slightly */
+.forgot-link a:hover, .register-link a:hover{
+transform:translateY(-2px);
+color:var(--accent);
+text-decoration:underline;
+}
+
+/* Responsive layout for tablet */
+@media (max-width:1024px){
+.login-page-container{ width:520px; padding:40px; }
+.login-card{ max-width:420px; }
+}
+
+/* Small screens adjustments */
+@media (max-width:768px){
+.login-page-container{ width:92%; padding:34px 24px; }
+.role-switch{ gap:8px; }
+.role-switch button{ padding:9px 12px; font-size:14px; }
+.primary{ font-size:16px; padding:12px; }
+}
+
+/* Very small phones */
+@media (max-width:420px){
+.login-page-container{ padding:26px 18px; border-radius:14px; }
+.login-card{ padding:14px; }
+.login-title{ font-size:20px; }
+.login-subtext{ font-size:14px; }
+}
+
+/* Utility: visually-hidden for accessibility */
+.visually-hidden{ position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+
+/* End of Login styles */

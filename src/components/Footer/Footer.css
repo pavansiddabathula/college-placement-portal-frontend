@@ -1,0 +1,35 @@
+/* ultra-slim footer */
+.footer {
+  background: var(--navy);
+  padding: 4px 0;                     /* ultra slim height */
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ultra slim text */
+.footer-text {
+  margin: 0;                           /* remove default <p> margin */
+  padding: 0 8px;
+  font-size: 11.5px;                   /* small, premium text */
+  color: rgba(255,255,255,0.80);
+  letter-spacing: 0.15px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+/* hover subtle glow */
+.footer-text:hover {
+  color: rgba(255,255,255,0.95);
+  transition: color 0.25s ease;
+}
+
+/* mobile refinement */
+@media (max-width: 768px) {
+  .footer {
+    padding: 4px 0;
+  }
+  .footer-text {
+    font-size: 11px;
+  }
+}

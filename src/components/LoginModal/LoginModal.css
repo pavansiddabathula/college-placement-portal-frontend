@@ -1,0 +1,131 @@
+/* root colors */
+:root {
+  --navy: #0a192f;
+  --white: #ffffff;
+  --off-white: #f5f8ff;
+  --border: #d9e1f2;
+  --shadow: rgba(10, 25, 47, 0.12);
+}
+
+/* wrapper */
+.login-modal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* card */
+.login-card {
+  width: 380px;
+  background: var(--white);
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 28px var(--shadow);
+}
+
+/* top role buttons */
+.role-switch {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+/* role button */
+.role-switch button {
+  padding: 9px 16px;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* active role button */
+.role-switch button.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+/* label */
+label {
+  font-weight: 600;
+  margin-top: 14px;
+  display: block;
+  color: var(--navy);
+}
+
+/* input */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-top: 6px;
+  background: #f9fbff;
+}
+
+/* input focus */
+input:focus {
+  border-color: var(--navy);
+  outline: none;
+}
+
+/* Password container */
+.password-row {
+  position: relative;
+  width: 100%;
+}
+
+/* Password input */
+.password-row input {
+  width: 100%;
+  padding-right: 40px; /* space for icon */
+}
+
+/* Eye icon inside field */
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; /* slightly smaller */
+  cursor: pointer;
+  color: #555;
+  transition: color .25s ease;
+}
+
+.eye-icon:hover {
+  color: var(--navy);
+}
+
+
+/* submit button */
+.primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+/* errors */
+.err {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* responsive */
+@media (max-width: 480px) {
+  .login-card {
+    width: 94%;
+    padding: 26px;
+  }
+}
