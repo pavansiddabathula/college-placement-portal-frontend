@@ -1,0 +1,275 @@
+/* ------------------------------------
+   NAVBAR WRAPPER (reduced height)
+------------------------------------ */
+.main-header {
+  background: var(--navy);
+  padding: 6px 0; /* shorter navbar */
+  box-shadow: var(--shadow-medium);
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  width: 100%;
+}
+
+/* ------------------------------------
+   NAVBAR CONTAINER (balanced spacing)
+------------------------------------ */
+.nav-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 20px; /* reduced right-left padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ------------------------------------
+   LOGO
+------------------------------------ */
+.logo {
+  color: var(--white);
+  font-size: var(--font-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.4px;
+  transition: transform 0.2s ease;
+}
+.logo:hover {
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------
+   NAV MENU - DESKTOP
+------------------------------------ */
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 18px; /* cleaner spacing */
+}
+
+.nav-menu ul li {
+  display: flex;
+  align-items: center;
+}
+
+/* ------------------------------------
+   NAV LINKS — DESKTOP + ACTIVE
+------------------------------------ */
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.93rem;
+  padding: 6px 2px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 5px;
+}
+
+/* underline hover animation */
+.nav-link::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  display: block;
+  transition: width 0.25s ease;
+  margin-top: 3px;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ------------------------------------
+   ACTION BUTTONS (small + cleaner)
+------------------------------------ */
+.btn-outline,
+.btn-filled,
+.btn-logout {
+  padding: 6px 14px; /* reduced */
+  border-radius: 6px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* outline button */
+.btn-outline {
+  color: var(--white);
+  background: transparent;
+  border: 2px solid var(--white);
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* filled button */
+.btn-filled {
+  background: var(--white);
+  color: var(--navy);
+  border: none;
+}
+.btn-filled:hover {
+  background: #e6eeff;
+  transform: translateY(-2px);
+}
+
+/* logout button */
+.btn-logout {
+  background: #ff4949;
+  color: white;
+  border: none;
+}
+.btn-logout:hover {
+  background: #e73535;
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------
+   HAMBURGER ICON (always visible on mobile)
+------------------------------------ */
+
+/* base — hidden on desktop */
+.hamburger {
+  width: 28px;
+  height: 20px;
+  display: none;                     /* desktop hidden */
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1500;                     /* ensures visible above drawer */
+}
+
+/* lines */
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #ffffff;               /* explicit white for visibility */
+  border-radius: 2px;
+  transition: 0.25s ease;
+}
+
+/* active animation */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+
+/* ------------------------------------
+   MOBILE NAV — SLIM COMPACT DRAWER
+------------------------------------ */
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* drawer width reduced */
+  .nav-menu {
+    position: fixed;
+    top: 58px; /* reduced height align */
+    right: 0;
+    width: 48%; /* narrower drawer */
+    max-height: 0;
+    overflow-y: auto;
+    background: var(--navy);
+    padding: 0;
+    transition: max-height 0.35s ease;
+    box-shadow: -4px 10px 28px rgba(0,0,0,0.40);
+    border-bottom-left-radius: 14px;
+  }
+
+  .nav-menu.open {
+    max-height: 500px;
+  }
+
+  /* vertical list */
+  .nav-menu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 14px;
+    gap: 10px;
+  }
+
+  .nav-menu ul li {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 6px 0;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.92);
+    transition: padding-left 0.2s ease;
+  }
+
+  .nav-link:hover {
+    padding-left: 6px;
+    color: #fff;
+  }
+
+  .nav-link.active,
+  .nav-link:active {
+    background: rgba(255,255,255,0.10);
+    border-radius: 6px;
+    padding-left: 8px;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  /* buttons compact */
+  .btn-outline,
+  .btn-filled,
+  .btn-logout {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    margin-top: 8px;
+  }
+
+  /* mobile header spacing */
+  .nav-container {
+    padding: 0 12px;
+  }
+}
+
+/* MOBILE ONLY — show the icon */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex !important;        /* force visible */
+    margin-left: auto;               /* right alignment */
+    margin-right: 2px;
+  }
+}
