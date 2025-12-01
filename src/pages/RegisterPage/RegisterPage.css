@@ -1,0 +1,172 @@
+/* page wrapper — centers page content */
+.page-wrapper {
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 20px 12px;
+background: transparent;
+box-sizing: border-box;
+}
+
+/* form card — elevated, compact, production-grade */
+.form-container {
+background: var(--white);
+width: 100%;
+max-width: 520px;
+padding: 32px 28px;
+border-radius: 14px;
+box-shadow: var(--shadow-soft);
+border: 1px solid var(--border);
+animation: fadeIn .28s var(--ease);
+margin-top: 18px;
+}
+
+/* heading — prominent and responsive */
+.form-container h2 {
+text-align: center;
+margin-bottom: 12px;
+color: var(--navy-700);
+font-weight: var(--font-weight-bold);
+font-size: clamp(20px, 2.6vw, 26px);
+letter-spacing: 0.2px;
+}
+
+/* form group wrapper — spacing between controls */
+.form-group {
+margin-bottom: var(--space-md);
+}
+
+/* labels — left aligned and clear */
+.form-group label {
+display: block;
+font-weight: var(--font-weight-medium);
+font-size: clamp(13px, 1.2vw, 14px);
+color: var(--navy-700);
+margin-bottom: 8px;
+}
+
+/* inputs — roomy, clean, focus glow */
+.form-group input,
+.form-group select,
+.form-group textarea {
+width: 100%;
+padding: 12px 14px;
+border-radius: var(--radius-sm);
+border: 1px solid var(--border);
+background: #fbfdff;
+font-size: var(--font-sm);
+color: var(--navy-700);
+box-sizing: border-box;
+transition: box-shadow var(--transition-fast) var(--ease), border-color var(--transition-fast) var(--ease), transform var(--transition-fast) var(--ease);
+}
+
+/* input focus state — soft glow */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: var(--accent);
+box-shadow: 0 10px 28px rgba(11,102,255,0.06);
+transform: translateY(-1px);
+}
+
+/* error state — clear visual feedback */
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+border-color: var(--danger);
+box-shadow: 0 8px 20px rgba(211,47,47,0.06);
+}
+
+/* error text — subtle and readable */
+.error-message {
+margin-top: 6px;
+color: var(--danger);
+font-size: 13px;
+}
+
+/* submit button — strong CTA with hover lift */
+.submit-btn {
+width: 100%;
+padding: 12px 14px;
+background: var(--navy-700);
+color: var(--white);
+border: none;
+border-radius: 10px;
+font-weight: var(--font-weight-bold);
+font-size: clamp(14px, 1.4vw, 16px);
+cursor: pointer;
+transition: transform var(--transition-fast) var(--ease), box-shadow var(--transition) var(--ease), background var(--transition-fast) var(--ease);
+box-shadow: 0 12px 34px rgba(11,38,73,0.08);
+}
+
+/* submit hover & active */
+.submit-btn:hover:not(:disabled) {
+background: #061a3b;
+transform: translateY(-3px);
+box-shadow: 0 20px 46px rgba(11,38,73,0.12);
+}
+.submit-btn:active { transform: translateY(0); }
+
+/* disabled state */
+.submit-btn:disabled {
+opacity: 0.65;
+cursor: not-allowed;
+transform: none;
+box-shadow: none;
+}
+
+/* link text area — centered and accessible */
+.form-link-text {
+text-align: center;
+margin-top: 14px;
+font-size: var(--font-sm);
+color: var(--muted);
+}
+
+/* link style — actionable and animated */
+.form-link-text a {
+font-weight: var(--font-weight-medium);
+color: var(--navy-700);
+text-decoration: none;
+transition: transform var(--transition-fast) var(--ease), color var(--transition-fast) var(--ease);
+display: inline-block;
+}
+.form-link-text a:hover {
+transform: translateY(-2px);
+color: var(--accent);
+text-decoration: underline;
+}
+
+/* small helper text */
+.form-help {
+font-size: 13px;
+color: var(--muted);
+margin-top: 6px;
+}
+
+/* compact responsive tweaks for tablet */
+@media (max-width: 1024px) {
+.form-container { padding: 26px 22px; max-width: 520px; }
+.submit-btn { padding: 12px; }
+}
+
+/* mobile layout — card becomes full width and comfortable */
+@media (max-width: 768px) {
+.page-wrapper { padding: 16px 12px; align-items: flex-start; }
+.form-container { width: 100%; padding: 20px 16px; border-radius: 12px; margin-top: 10px; }
+.form-container h2 { font-size: clamp(18px, 3.6vw, 22px); }
+.form-group input { padding: 12px; }
+.submit-btn { font-size: 15px; }
+}
+
+/* small phones — preserve spacing and readability */
+@media (max-width: 420px) {
+.form-container { padding: 16px 14px; border-radius: 10px; }
+.form-group label { margin-bottom: 6px; }
+.submit-btn { padding: 10px; }
+}
+
+/* fade animation */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
