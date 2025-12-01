@@ -1,0 +1,140 @@
+/* VerifyOtpPage.css */
+/* page wrapper */
+.forgot-page {
+  min-height: calc(100vh - 140px);
+  padding: 44px 16px;
+  background: var(--off-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* center card */
+.forgot-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--white);
+  padding: 34px 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px var(--shadow);
+  border: 1px solid var(--border);
+  text-align: center;
+  animation: fadeIn 0.28s ease;
+}
+
+/* heading */
+.title {
+  color: var(--navy);
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+/* subtitle */
+.subtitle {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 18px;
+}
+
+/* input label */
+.input-label {
+  text-align: left;
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+  color: var(--navy);
+}
+
+/* input box */
+.input-box {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f9fbff;
+  font-size: 0.95rem;
+  margin-top: 6px;
+  transition: border var(--transition);
+}
+
+/* input focus */
+.input-box:focus {
+  border-color: var(--navy);
+  outline: none;
+}
+
+/* verify button */
+.btn-primary {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* hover for button */
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(10,25,47,0.08);
+}
+
+/* error text */
+.error {
+  color: #d32f2f;
+  margin: 10px 0 6px 0;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* backlink container */
+.back {
+  margin-top: 16px;
+  text-align: left;
+}
+
+/* backlink anchor */
+.back a {
+  color: var(--navy);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* backlink hover */
+.back a:hover {
+  text-decoration: underline;
+}
+
+/* fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* tablet responsive */
+@media (max-width: 1024px) {
+  .forgot-card {
+    padding: 32px 24px;
+  }
+  .title { font-size: 24px; }
+}
+
+/* mobile responsive */
+@media (max-width: 768px) {
+  .forgot-page { padding: 28px 12px; }
+  .forgot-card {
+    padding: 22px 18px;
+    border-radius: 12px;
+  }
+  .title { font-size: 20px; }
+  .subtitle { font-size: 13px; }
+  .back { text-align: center; margin-top: 18px; }
+  .back a { display: inline-block; }
+}
