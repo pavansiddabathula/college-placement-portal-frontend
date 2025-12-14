@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useAuth } from "../../context/AuthContext";
 
 export default function StudentNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const { setAuth } = useAuth();
 
@@ -17,43 +18,68 @@ export default function StudentNavbar() {
     navigate("/login");
   };
 
+  /* 🔒 Lock body scroll */
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+    return () => (document.body.style.overflow = "auto");
+  }, [menuOpen]);
+
+  /* 🔁 Close menu on route change */
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   return (
     <header className="main-header">
       <div className="nav-container">
+
+        {/* LOGO */}
         <div className="logo">NextStep Portal</div>
 
+        {/* NAV MENU */}
+        <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
+          <ul>
+            <li><NavLink to="/student/dashboard" className="nav-link">Dashboard</NavLink></li>
+            <li><NavLink to="/jobs" className="nav-link">Jobs</NavLink></li>
+            <li><NavLink to="/trainings" className="nav-link">Training</NavLink></li>
+            <li><NavLink to="/roadmaps" className="nav-link">Roadmaps</NavLink></li>
+            <li><NavLink to="/companies" className="nav-link">Companies</NavLink></li>
+            <li><NavLink to="/profile" className="nav-link">Profile</NavLink></li>
+
+            {/* MOBILE LOGOUT */}
+            <li className="mobile-auth">
+              <button className="btn-logout" onClick={logout}>
+                Logout
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        {/* DESKTOP LOGOUT */}
+        <div className="nav-actions">
+          <button className="btn-logout" onClick={logout}>
+            Logout
+          </button>
+        </div>
+
+        {/* HAMBURGER */}
         <div
           className={`hamburger ${menuOpen ? "active" : ""}`}
+          role="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          tabIndex={0}
           onClick={() => setMenuOpen(prev => !prev)}
+          onKeyDown={(e) => e.key === "Enter" && setMenuOpen(prev => !prev)}
         >
-          <span /><span /><span />
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
 
-      {/* Overlay */}
-      {menuOpen && <div className="nav-overlay" onClick={closeMenu} />}
-
-      <nav
-        className={`nav-menu ${menuOpen ? "open" : ""}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <ul>
-          <li><Link to="/student-dashboard" className="nav-link" onClick={closeMenu}>Home</Link></li>
-          <li><Link to="/jobs" className="nav-link" onClick={closeMenu}>Jobs</Link></li>
-          <li><Link to="/trainings" className="nav-link" onClick={closeMenu}>Trainings</Link></li>
-          <li><Link to="/counselling" className="nav-link" onClick={closeMenu}>Counselling</Link></li>
-          <li><Link to="/guidance" className="nav-link" onClick={closeMenu}>Guidance</Link></li>
-          <li><Link to="/roadmaps" className="nav-link" onClick={closeMenu}>Roadmaps</Link></li>
-          <li><Link to="/companies" className="nav-link" onClick={closeMenu}>Companies</Link></li>
-          <li><Link to="/profile" className="nav-link" onClick={closeMenu}>Profile</Link></li>
-
-          <li>
-            <button className="btn-logout" onClick={logout}>
-              Logout
-            </button>
-          </li>
-        </ul>
-      </nav>
+      {/* OVERLAY */}
+      {menuOpen && <div className="nav-overlay" onClick={closeMenu}></div>}
     </header>
   );
 }
