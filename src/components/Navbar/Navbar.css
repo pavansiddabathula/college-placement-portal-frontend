@@ -1,9 +1,11 @@
-/* ------------------------------------
-   NAVBAR WRAPPER (reduced height)
------------------------------------- */
+/* =========================================================
+   DESKTOP STYLES (DEFAULT)
+   ========================================================= */
+
+/* NAVBAR WRAPPER */
 .main-header {
   background: var(--navy);
-  padding: 6px 0; /* shorter navbar */
+  padding: 6px 0;
   box-shadow: var(--shadow-medium);
   position: sticky;
   top: 0;
@@ -11,38 +13,36 @@
   width: 100%;
 }
 
-/* ------------------------------------
-   NAVBAR CONTAINER (balanced spacing)
------------------------------------- */
+/* NAVBAR CONTAINER */
 .nav-container {
-  max-width: var(--max-content-width);
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 20px; /* reduced right-left padding */
+  padding: 0 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 16px;
 }
 
-/* ------------------------------------
-   LOGO
------------------------------------- */
+/* LOGO */
 .logo {
   color: var(--white);
   font-size: var(--font-lg);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.4px;
-  transition: transform 0.2s ease;
+  white-space: nowrap;
+  transition: transform 0.25s ease;
 }
+
 .logo:hover {
   transform: translateY(-2px);
 }
 
-/* ------------------------------------
-   NAV MENU - DESKTOP
------------------------------------- */
+/* NAV MENU (CENTER) */
 .nav-menu {
+  flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -50,7 +50,7 @@
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 18px; /* cleaner spacing */
+  gap: 18px;
 }
 
 .nav-menu ul li {
@@ -58,15 +58,14 @@
   align-items: center;
 }
 
-/* ------------------------------------
-   NAV LINKS — DESKTOP + ACTIVE
------------------------------------- */
+/* NAV LINKS */
 .nav-link {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.93rem;
   padding: 6px 2px;
   font-weight: 500;
-  transition: all 0.25s ease;
+  white-space: nowrap;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .nav-link:hover {
@@ -74,14 +73,6 @@
   transform: translateY(-1px);
 }
 
-.nav-link.active {
-  color: #ffffff;
-  font-weight: 600;
-  border-bottom: 2px solid #ffffff;
-  padding-bottom: 5px;
-}
-
-/* underline hover animation */
 .nav-link::after {
   content: "";
   width: 0;
@@ -91,132 +82,151 @@
   transition: width 0.25s ease;
   margin-top: 3px;
 }
+
 .nav-link:hover::after {
   width: 100%;
 }
 
-/* ------------------------------------
-   ACTION BUTTONS (small + cleaner)
------------------------------------- */
+/* AUTH BUTTONS */
 .btn-outline,
-.btn-filled,
-.btn-logout {
-  padding: 6px 14px; /* reduced */
+.btn-filled {
+  padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.88rem;
-  cursor: pointer;
   font-weight: 600;
-  transition: 0.25s ease;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* outline button */
+/* OUTLINE */
 .btn-outline {
   color: var(--white);
   background: transparent;
   border: 2px solid var(--white);
 }
+
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(255,255,255,0.25);
 }
 
-/* filled button */
+/* FILLED */
 .btn-filled {
   background: var(--white);
   color: var(--navy);
   border: none;
 }
+
 .btn-filled:hover {
-  background: #e6eeff;
   transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
 
-/* logout button */
-.btn-logout {
-  background: #ff4949;
-  color: white;
-  border: none;
-}
-.btn-logout:hover {
-  background: #e73535;
-  transform: translateY(-2px);
+/* DESKTOP AUTH */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
 }
 
-/* ------------------------------------
-   HAMBURGER ICON (always visible on mobile)
------------------------------------- */
+.nav-actions .btn-outline,
+.nav-actions .btn-filled {
+  min-width: 88px;
+}
 
-/* base — hidden on desktop */
+/* HAMBURGER (HIDDEN DESKTOP) */
 .hamburger {
-  width: 28px;
-  height: 20px;
-  display: none;                     /* desktop hidden */
+  width: 26px;
+  height: 18px;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  z-index: 1500;                     /* ensures visible above drawer */
+  z-index: 1500;
 }
 
-/* lines */
 .hamburger span {
-  display: block;
   height: 3px;
-  width: 100%;
-  background: #ffffff;               /* explicit white for visibility */
+  width: 80%;
+  background: #ffffff;
   border-radius: 2px;
-  transition: 0.25s ease;
+  transition: transform 0.3s ease, opacity 0.25s ease;
 }
 
-/* active animation */
-.hamburger.active span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+/* HIDE MOBILE AUTH ON DESKTOP */
+.nav-menu .mobile-auth {
+  display: none;
 }
 
-
-
-/* ------------------------------------
-   MOBILE NAV — SLIM COMPACT DRAWER
------------------------------------- */
-@media (max-width: 768px) {
-
-  .hamburger {
-    display: flex;
+/* =========================================================
+   TABLET ADJUSTMENT
+   ========================================================= */
+@media (max-width: 1024px) {
+  .nav-menu ul {
+    gap: 14px;
   }
 
-  /* drawer width reduced */
+  .nav-link {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   MOBILE STYLES
+   ========================================================= */
+@media (max-width: 768px) {
+
+  /* SHOW HAMBURGER */
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  /* HIDE DESKTOP AUTH */
+  .nav-actions {
+    display: none;
+  }
+
+  /* MOBILE DRAWER */
   .nav-menu {
+    display: block;
     position: fixed;
-    top: 58px; /* reduced height align */
-    right: 0;
-    width: 48%; /* narrower drawer */
-    max-height: 0;
+    top: 56px;
+    right: 0;  
+    width: min(64%, 260px);
+            /* 🔑 reduced width */
+    height: auto;
+    max-height: calc(100vh - 56px);      /* 🔑 no cut */
     overflow-y: auto;
-    background: var(--navy);
-    padding: 0;
-    transition: max-height 0.35s ease;
-    box-shadow: -4px 10px 28px rgba(0,0,0,0.40);
+    background: linear-gradient(
+      180deg,
+      #102b4d 0%,
+      #0b1e36 60%,
+      #08172b 100%
+    );
+    z-index: 1101;
     border-bottom-left-radius: 14px;
+    box-shadow: -6px 14px 28px rgba(0,0,0,0.45);
+
+    /* animation */
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.25s ease;
   }
 
   .nav-menu.open {
-    max-height: 500px;
+    transform: translateX(0);
+    opacity: 1;
   }
 
-  /* vertical list */
   .nav-menu ul {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 14px 14px;
+    padding: 14px;
     gap: 10px;
   }
 
@@ -226,50 +236,44 @@
 
   .nav-link {
     width: 100%;
-    padding: 6px 0;
     font-size: 0.92rem;
-    color: rgba(255,255,255,0.92);
-    transition: padding-left 0.2s ease;
-  }
-
-  .nav-link:hover {
-    padding-left: 6px;
-    color: #fff;
-  }
-
-  .nav-link.active,
-  .nav-link:active {
-    background: rgba(255,255,255,0.10);
-    border-radius: 6px;
-    padding-left: 8px;
+    color: #ffffff;
   }
 
   .nav-link::after {
     display: none;
   }
 
-  /* buttons compact */
-  .btn-outline,
-  .btn-filled,
-  .btn-logout {
+  /* MOBILE AUTH BUTTONS */
+  .nav-menu .mobile-auth {
+    display: block;
     width: 100%;
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 0.92rem;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
-  /* mobile header spacing */
+  .nav-menu .btn-outline,
+  .nav-menu .btn-filled {
+    width: 90%;
+    margin: 8px auto 0;
+    padding: 7px 10px;                   /* 🔑 smaller buttons */
+    font-size: 0.88rem;
+    border-radius: 8px;
+  }
+
   .nav-container {
     padding: 0 12px;
   }
 }
 
-/* MOBILE ONLY — show the icon */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex !important;        /* force visible */
-    margin-left: auto;               /* right alignment */
-    margin-right: 2px;
-  }
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.02);
+
+  z-index: 1000;
 }
+
+
