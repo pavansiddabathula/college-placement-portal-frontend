@@ -15,6 +15,8 @@ import SetPassword from "./pages/SetPasswordPage/SetPasswordPage";
 
 import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import CreateJob from "./pages/AdminDashBoardPages/CreateJobPage/CreateJob";
+
 
 
 export default function App() {
@@ -36,6 +38,8 @@ export default function App() {
               <Route path="/set-password" element={<SetPassword />} />
               <Route path="/student-dashboard" element={<StudentDashboard />} />
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/add-job" element={<CreateJob />} />
+
             </Routes>
           </div>
 

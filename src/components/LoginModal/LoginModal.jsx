@@ -24,7 +24,7 @@ export default function LoginModal({ onLogin }) {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // ✅ NEW: success message state
+  // Success message state
   const [success, setSuccess] = useState("");
 
   const validateField = (name, value) => {
@@ -47,9 +47,7 @@ export default function LoginModal({ onLogin }) {
 
       if (name === "password") {
         next.password =
-          value.length >= 6
-            ? ""
-            : "Password must be at least 6 characters.";
+          value.length >= 6 ? "" : "Password must be at least 6 characters.";
       }
 
       return next;
@@ -86,43 +84,47 @@ export default function LoginModal({ onLogin }) {
 
     setLoading(true);
     setErrors({});
-    setSuccess(""); // clear previous success message
+    setSuccess("");
+try {
+  let res;
 
-    try {
-      let res;
+  if (role === "STUDENT") {
+    res = await api.post("/auth/student/login", {
+      rollNumber: rollOrId.trim(),
+      password
+    });
+  } else {
+    res = await api.post("/auth/admin/login", {
+      adminid: rollOrId.trim(),
+      password
+    });
+  }
 
-      if (role === "STUDENT") {
-        res = await api.post("api/auth/student/login", {
-          rollNumber: rollOrId.trim(),
-          password
-        });
-      } else {
-        res = await api.post("api/auth/admin/login", {
-          adminid: rollOrId.trim(),
-          password
-        });
-      }
+  // 🔥 SUCCESS CHECK FIXED — CHECK TOKEN NOT "status"
+  if (res.status === 200 && res.data.access_token) {
 
-      const loginData = {
-        role,
-        token: res.data.access_token,
-        tokenType: res.data.token_type,
-        roles: res.data.roles,
-        user: res.data.user
-      };
+    const loginData = {
+      role,
+      token: res.data.access_token,
+      tokenType: res.data.token_type,
+      roles: res.data.roles,
+      user: res.data.user
+    };
 
-      setAuth(loginData);
-      // ✅ SHOW SUCCESS MESSAGE
-      setSuccess("Login successful!");
-      onLogin(loginData);
+    setAuth(loginData);
+    setSuccess("Login successful!");
+    onLogin(loginData);
 
-      
-      
+    setTimeout(() => {
+      navigate(role === "STUDENT" ? "/student-dashboard" : "/admin/dashboard");
+    }, 1000);
 
-      // wait 1s then redirect
-      setTimeout(() => {
-        navigate(role === "STUDENT" ? "/student-dashboard" : "/admin/dashboard");
-      }, 10000);
+  } else {
+    setErrors({
+      backend: res.data.errorMessage || "Invalid login details."
+    });
+    setSuccess("");
+  }
 
     } catch (err) {
       if (!err.response) {
@@ -130,8 +132,9 @@ export default function LoginModal({ onLogin }) {
           backend: "Server is not available. Please try again later."
         });
       } else {
+        const backend = err.response.data;
         setErrors({
-          backend: err?.response?.data?.message || "Invalid login details."
+          backend: backend.errorMessage || "Invalid login details."
         });
       }
 
@@ -230,7 +233,7 @@ export default function LoginModal({ onLogin }) {
           {errors.password && <div className="err">{errors.password}</div>}
           {errors.backend && <div className="err backend">{errors.backend}</div>}
 
-          {/* ✅ SUCCESS MESSAGE (inline styling) */}
+          {/* SUCCESS MESSAGE */}
           {success && (
             <div
               style={{
