@@ -31,7 +31,7 @@ export default function SetPassword() {
     }
 
     try {
-      const res = await api.post("/api/auth/set-password", {
+      const res = await api.post("/auth/set-password", {
         identifier,
         newPassword,
         confirmPassword

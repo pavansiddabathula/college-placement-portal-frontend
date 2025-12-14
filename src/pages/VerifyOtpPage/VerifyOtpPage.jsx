@@ -22,7 +22,7 @@ export default function VerifyOtp() {
     }
 
     try {
-    const res = await api.post("/api/auth/verify-otp", { identifier, otp });
+    const res = await api.post("/auth/verify-otp", { identifier, otp });
 
     const nextUrl = res.data.returnurl;
 

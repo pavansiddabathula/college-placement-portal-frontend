@@ -1,8 +1,11 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import "./RegisterPage.css";
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     rollNumber: "",
     firstName: "",
@@ -14,6 +17,8 @@ export default function RegisterPage() {
 
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState(null);
+  const [serverSuccess, setServerSuccess] = useState(null);
 
   const rollRef = useRef(null);
   const firstRef = useRef(null);
@@ -49,9 +54,7 @@ export default function RegisterPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setForm({ ...form, [name]: value });
-
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
@@ -60,14 +63,15 @@ export default function RegisterPage() {
       const next = { ...prev };
 
       if (name === "rollNumber") {
-        next.rollNumber =
-          /^[0-9A-Za-z]{10}$/.test(value.trim())
-            ? ""
-            : "Roll Number must be 10 alphanumeric characters.";
+        next.rollNumber = /^[0-9A-Za-z]{10}$/.test(value.trim())
+          ? ""
+          : "Roll Number must be 10 alphanumeric characters.";
       }
 
       if (name === "firstName") {
-        next.firstName = value.trim() ? "" : "Surname (First Name) is required.";
+        next.firstName = value.trim()
+          ? ""
+          : "Surname (First Name) is required.";
       }
 
       if (name === "lastName") {
@@ -79,17 +83,15 @@ export default function RegisterPage() {
       }
 
       if (name === "email") {
-        next.email =
-          /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value.trim())
-            ? ""
-            : "Enter a valid Gmail address.";
+        next.email = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value.trim())
+          ? ""
+          : "Enter a valid Gmail address.";
       }
 
       if (name === "phoneNumber") {
-        next.phoneNumber =
-          /^[0-9]{10}$/.test(value.trim())
-            ? ""
-            : "Phone must be exactly 10 digits.";
+        next.phoneNumber = /^[0-9]{10}$/.test(value.trim())
+          ? ""
+          : "Phone must be exactly 10 digits.";
       }
 
       return next;
@@ -101,36 +103,61 @@ export default function RegisterPage() {
     if (!validate()) return;
 
     setSubmitting(true);
+    setServerError(null);
+    setServerSuccess(null);
 
     try {
       const payload = {
         rollNumber: form.rollNumber.trim(),
-        fullName: `${form.firstName.trim()} ${form.lastName.trim()}`,
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
         email: form.email.trim(),
         phoneNumber: form.phoneNumber.trim(),
         branch: form.branch.trim()
       };
 
-      await api.post("/api/students/create", payload);
+      const response = await api.post("/students/create", payload);
 
-      alert("Registration successful! Credentials will be sent to your Gmail.");
+      if (response.data.status === "SUCCESS") {
+        setServerError(null);
+        setServerSuccess(
+          response.data.message ||
+            "Registration successful! Login credentials sent to Gmail."
+        );
 
-      setForm({
-        rollNumber: "",
-        firstName: "",
-        lastName: "",
-        branch: "",
-        email: "",
-        phoneNumber: ""
-      });
+        setForm({
+          rollNumber: "",
+          firstName: "",
+          lastName: "",
+          branch: "",
+          email: "",
+          phoneNumber: ""
+        });
 
-      setErrors({});
-
-    } catch (err) {
-      if (!err.response) {
-        alert("Server is not available. Please try again later.");
+        setErrors({});
+        setTimeout(() => navigate("/login"), 1200);
       } else {
-        alert(err.response.data?.message || "Registration failed.");
+        setServerSuccess(null);
+        setServerError(
+          response.data.errorMessage || "Registration failed."
+        );
+
+        if (response.data.fieldErrors) {
+          setErrors((prev) => ({ ...prev, ...response.data.fieldErrors }));
+        }
+      }
+    } catch (err) {
+      setServerSuccess(null);
+
+      if (!err.response) {
+        setServerError("Server is not available. Please try again later.");
+      } else {
+        const backend = err.response.data;
+        setServerError(backend.errorMessage || "Request failed.");
+
+        if (backend.fieldErrors) {
+          setErrors((prev) => ({ ...prev, ...backend.fieldErrors }));
+        }
       }
     }
 
@@ -142,8 +169,15 @@ export default function RegisterPage() {
       <div className="form-container">
         <h2>Student Registration</h2>
 
-        <form onSubmit={handleSubmit} noValidate>
+        {serverSuccess && (
+          <div className="server-success">{serverSuccess}</div>
+        )}
+        {serverError && (
+          <div className="server-error">{serverError}</div>
+        )}
 
+        <form onSubmit={handleSubmit} noValidate>
+          
           {/* Roll Number */}
           <div className={`form-group ${errors.rollNumber ? "error" : ""}`}>
             <label>Roll Number</label>
@@ -152,7 +186,9 @@ export default function RegisterPage() {
               name="rollNumber"
               value={form.rollNumber}
               onChange={handleChange}
-              onBlur={() => validateField("rollNumber", form.rollNumber)}
+              onBlur={() =>
+                validateField("rollNumber", form.rollNumber)
+              }
               placeholder="10-character Roll Number"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -162,7 +198,9 @@ export default function RegisterPage() {
                 }
               }}
             />
-            {errors.rollNumber && <div className="error-message">{errors.rollNumber}</div>}
+            {errors.rollNumber && (
+              <div className="error-message">{errors.rollNumber}</div>
+            )}
           </div>
 
           {/* First Name */}
@@ -173,7 +211,9 @@ export default function RegisterPage() {
               name="firstName"
               value={form.firstName}
               onChange={handleChange}
-              onBlur={() => validateField("firstName", form.firstName)}
+              onBlur={() =>
+                validateField("firstName", form.firstName)
+              }
               placeholder="Surname / Family Name"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -183,7 +223,9 @@ export default function RegisterPage() {
                 }
               }}
             />
-            {errors.firstName && <div className="error-message">{errors.firstName}</div>}
+            {errors.firstName && (
+              <div className="error-message">{errors.firstName}</div>
+            )}
           </div>
 
           {/* Last Name */}
@@ -194,7 +236,9 @@ export default function RegisterPage() {
               name="lastName"
               value={form.lastName}
               onChange={handleChange}
-              onBlur={() => validateField("lastName", form.lastName)}
+              onBlur={() =>
+                validateField("lastName", form.lastName)
+              }
               placeholder="Your Name"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -204,10 +248,12 @@ export default function RegisterPage() {
                 }
               }}
             />
-            {errors.lastName && <div className="error-message">{errors.lastName}</div>}
+            {errors.lastName && (
+              <div className="error-message">{errors.lastName}</div>
+            )}
           </div>
 
-          {/* Branch (Dropdown) */}
+          {/* Branch */}
           <div className={`form-group ${errors.branch ? "error" : ""}`}>
             <label>Branch</label>
             <select
@@ -215,7 +261,9 @@ export default function RegisterPage() {
               name="branch"
               value={form.branch}
               onChange={handleChange}
-              onBlur={() => validateField("branch", form.branch)}
+              onBlur={() =>
+                validateField("branch", form.branch)
+              }
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
@@ -235,7 +283,9 @@ export default function RegisterPage() {
               <option value="IT">IT</option>
               <option value="IOT">IOT</option>
             </select>
-            {errors.branch && <div className="error-message">{errors.branch}</div>}
+            {errors.branch && (
+              <div className="error-message">{errors.branch}</div>
+            )}
           </div>
 
           {/* Gmail */}
@@ -246,7 +296,9 @@ export default function RegisterPage() {
               name="email"
               value={form.email}
               onChange={handleChange}
-              onBlur={() => validateField("email", form.email)}
+              onBlur={() =>
+                validateField("email", form.email)
+              }
               placeholder="yourname@gmail.com"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -256,10 +308,12 @@ export default function RegisterPage() {
                 }
               }}
             />
-            {errors.email && <div className="error-message">{errors.email}</div>}
+            {errors.email && (
+              <div className="error-message">{errors.email}</div>
+            )}
           </div>
 
-          {/* Phone Number */}
+          {/* Phone */}
           <div className={`form-group ${errors.phoneNumber ? "error" : ""}`}>
             <label>Phone Number</label>
             <input
@@ -267,17 +321,23 @@ export default function RegisterPage() {
               name="phoneNumber"
               value={form.phoneNumber}
               onChange={handleChange}
-              onBlur={() => validateField("phoneNumber", form.phoneNumber)}
+              onBlur={() =>
+                validateField("phoneNumber", form.phoneNumber)
+              }
               placeholder="10-digit number"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
                   validateField("phoneNumber", form.phoneNumber);
-                  document.querySelector(".submit-btn").click();
+                  document
+                    .querySelector(".submit-btn")
+                    .click();
                 }
               }}
             />
-            {errors.phoneNumber && <div className="error-message">{errors.phoneNumber}</div>}
+            {errors.phoneNumber && (
+              <div className="error-message">{errors.phoneNumber}</div>
+            )}
           </div>
 
           <button className="submit-btn" disabled={submitting}>

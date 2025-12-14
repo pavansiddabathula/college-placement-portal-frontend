@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
 /* Prevent default margin/padding */
 * {
   margin: 0;
